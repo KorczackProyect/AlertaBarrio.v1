@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" data-vista="login">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión · AlertaBarrio</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/login.css">
+  <script src="../Modelos/sesionModel.js" defer></script>
+  <script src="../controlador/accesoController.js" defer></script>
+  <script src="../Modelos/usuarioModel.js" defer></script>
+  <script src="../controlador/loginController.js" defer></script>
+</head>
+<body>
+  <nav class="navegacion-vistas" aria-label="Navegación principal">
+    <a class="boton" href="admin.html" data-roles="admin" hidden>Admin</a>
+    <a class="boton" href="usuario-muni.html" data-roles="admin muni" hidden>Centro de gestión</a>
+    <a class="boton" href="reportes-muni.html" data-roles="admin muni" hidden>Reportes</a>
+    <a class="boton" href="app-movil.html" data-roles="admin" hidden>App móvil · Reportar</a>
+    <a class="boton" href="app-movil.html" data-publico hidden>Reportar</a>
+    <a class="boton" href="login.html" data-publico hidden>Acceso municipal</a>
+    <span class="usuario-actual" data-con-sesion hidden><span data-usuario-sesion></span> · <span data-rol-sesion></span></span>
+    <button type="button" data-cerrar-sesion data-con-sesion hidden>Cerrar sesión</button>
+  </nav>
+  <main class="acceso">
+    <section class="panel acceso-panel" aria-labelledby="titulo-login">
+      <div class="logo">alerta<span>barrio</span> ·</div>
+      <span class="etiqueta">Prototipo</span>
+      <div class="seccion">GESTIÓN MUNICIPAL</div>
+      <h1 id="titulo-login">Iniciar sesión</h1>
+      <p class="secundario">Ingresa con tu cuenta para acceder a tu espacio de trabajo.</p>
+      <form id="formulario-login">
+        <label for="usuario-login">Usuario</label>
+        <input id="usuario-login" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        <label for="clave-login">Contraseña</label>
+        <div class="campo-clave">
+          <input id="clave-login" name="clave" type="password" autocomplete="current-password" required>
+          <button id="mostrar-clave" type="button" aria-pressed="false" aria-controls="clave-login">Mostrar</button>
+        </div>
+        <p id="error-login" class="error" role="alert" hidden></p>
+        <button class="principal ancho-completo" type="submit">Ingresar</button>
+      </form>
+      <p class="acceso-ayuda"><a href="app-movil.html">Reportar un incidente sin iniciar sesión</a></p>
+    </section>
+  </main>
+  <div id="aviso-global" class="aviso estado-global" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

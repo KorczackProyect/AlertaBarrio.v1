@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es" data-vista="mobile">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reportar desde el móvil · AlertaBarrio</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="../Modelos/sesionModel.js" defer></script>
+  <script src="../controlador/accesoController.js" defer></script>
+  <script src="../Modelos/incidenciaModel.js" defer></script>
+  <script src="../Modelos/reporteModel.js" defer></script>
+  <script src="../Modelos/borradorModel.js" defer></script>
+  <script src="js/vista.js" defer></script>
+  <script src="../controlador/formularioController.js" defer></script>
+</head>
+<body>
+  <nav class="navegacion-vistas" aria-label="Navegación principal">
+    <a class="boton" href="admin.html" data-roles="admin" hidden>Admin</a>
+    <a class="boton" href="usuario-muni.html" data-roles="admin muni" hidden>Centro de gestión</a>
+    <a class="boton" href="reportes-muni.html" data-roles="admin muni" hidden>Reportes</a>
+    <a class="boton" href="app-movil.html" data-roles="admin" hidden aria-current="page">App móvil · Reportar</a>
+    <a class="boton" href="app-movil.html" data-publico hidden>Reportar</a>
+    <a class="boton" href="login.html" data-publico hidden>Acceso municipal</a>
+    <span class="usuario-actual" data-con-sesion hidden><span data-usuario-sesion></span> · <span data-rol-sesion></span></span>
+    <button type="button" data-cerrar-sesion data-con-sesion hidden>Cerrar sesión</button>
+  </nav>
+  <div class="telefono">
+    <header class="cabecera"><div class="logo">alerta<span>barrio</span></div><small>9:41</small></header>
+    <main>
+      <small>REPORTE CIUDADANO</small>
+      <div class="pasos" aria-hidden="true"><span data-progreso="0" class="activo"></span><span data-progreso="1"></span><span data-progreso="2"></span><span data-progreso="3"></span></div>
+      <form id="formulario-reporte">
+        <section data-paso="0">
+          <h1 tabindex="-1">¿Qué está pasando?</h1>
+          <p class="secundario">Paso 1 de 4 · Elige el tipo de incidente.</p>
+          <div id="lista-tipos" class="tipos" role="group" aria-label="Tipo de incidencia"></div>
+          <div class="aviso">Si estás en riesgo, ponte a salvo y contacta a emergencias.</div>
+        </section>
+        <section data-paso="1" hidden>
+          <h1 tabindex="-1">Agrega evidencia.</h1>
+          <p id="tipo-evidencia" class="secundario">Paso 2 de 4</p>
+          <label for="evidencia">Foto, video o audio (opcional)</label>
+          <input id="evidencia" type="file" accept="image/*,video/*,audio/*">
+          <label for="descripcion">¿Qué ocurrió? (opcional)</label>
+          <textarea id="descripcion" rows="4" placeholder="Describe lo que observaste, sin exponerte."></textarea>
+          <small>No necesitas acercarte al incidente para reportarlo.</small>
+        </section>
+        <section data-paso="2" hidden>
+          <h1 tabindex="-1">Confirma el lugar.</h1>
+          <p class="secundario">Paso 3 de 4 · Ubicación del incidente</p>
+          <div class="aviso">Sector Centro · Av. Central 420<br><small>Ubicación de ejemplo; GPS simulado.</small></div>
+          <label for="direccion">Corregir dirección</label>
+          <input id="direccion" type="text" value="Av. Central 420">
+          <label><input id="nombre-oculto" type="checkbox" checked> Ocultar mi nombre en el seguimiento</label>
+          <small>La ubicación corresponde al incidente. No compartimos públicamente tu ubicación personal.</small>
+        </section>
+        <section data-paso="3" hidden>
+          <h1 tabindex="-1">Revisa y envía.</h1>
+          <p class="secundario">Paso 4 de 4 · Último paso</p>
+          <div class="panel">
+            <h3 id="resumen-tipo"></h3>
+            <p id="resumen-direccion"></p>
+            <p id="resumen-descripcion" class="secundario"></p>
+            <p id="resumen-evidencia" class="secundario"></p>
+            <span id="resumen-privacidad" class="etiqueta"></span>
+          </div>
+          <div class="aviso">Se enviará a Seguridad Municipal para revisión. Los reportes ciudadanos requieren verificación.</div>
+        </section>
+        <section data-paso="4" hidden>
+          <div class="confirmacion" aria-hidden="true">✓</div>
+          <h1 tabindex="-1">Reporte recibido.</h1>
+          <p class="secundario">Folio de demostración</p>
+          <div id="folio-enviado" class="numero"></div>
+          <span class="etiqueta">Pendiente de revisión</span>
+          <p>Guarda este folio como referencia de tu reporte.</p>
+          <div class="aviso">Este envío es una simulación. Ninguna municipalidad ha sido notificada.</div>
+        </section>
+        <button id="continuar" class="principal ancho-completo" type="button">Continuar</button>
+        <button id="volver" class="ancho-completo" type="button" hidden>Volver</button>
+      </form>
+      <template id="plantilla-tipo"><button type="button" aria-pressed="false"></button></template>
+    </main>
+  </div>
+  <div id="aviso-global" class="aviso estado-global" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

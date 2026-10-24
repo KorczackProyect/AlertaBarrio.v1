@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es" data-vista="admin">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · AlertaBarrio</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="../Modelos/sesionModel.js" defer></script>
+  <script src="../controlador/accesoController.js" defer></script>
+  <script src="../Modelos/municipalidadModel.js" defer></script>
+  <script src="js/vista.js" defer></script>
+  <script src="../controlador/adminController.js" defer></script>
+</head>
+<body>
+  <nav class="navegacion-vistas" aria-label="Navegación principal">
+    <a class="boton" href="admin.html" data-roles="admin" hidden aria-current="page">Admin</a>
+    <a class="boton" href="usuario-muni.html" data-roles="admin muni" hidden>Centro de gestión</a>
+    <a class="boton" href="reportes-muni.html" data-roles="admin muni" hidden>Reportes</a>
+    <a class="boton" href="app-movil.html" data-roles="admin" hidden>App móvil · Reportar</a>
+    <a class="boton" href="app-movil.html" data-publico hidden>Reportar</a>
+    <a class="boton" href="login.html" data-publico hidden>Acceso municipal</a>
+    <span class="usuario-actual" data-con-sesion hidden><span data-usuario-sesion></span> · <span data-rol-sesion></span></span>
+    <button type="button" data-cerrar-sesion data-con-sesion hidden>Cerrar sesión</button>
+  </nav>
+  <div class="aplicacion">
+    <header class="cabecera">
+      <div>
+        <div class="logo">alerta<span>barrio</span> ·</div>
+        <small>Información que se transforma en acción</small>
+      </div>
+      <div><span class="etiqueta">Prototipo</span> <span data-usuario-sesion></span> · Admin de plataforma</div>
+    </header>
+    <div class="distribucion">
+      <aside class="barra-lateral" aria-label="Secciones">
+        <div class="seccion">PLATAFORMA</div>
+        <span class="referencia">Resumen general</span>
+        <span class="referencia">Municipalidades</span>
+        <span class="referencia">Usuarios y permisos</span>
+        <span class="referencia">Auditoría</span>
+      </aside>
+      <main>
+        <div class="seccion">ADMINISTRACIÓN</div>
+        <div class="titulo">
+          <div><h1>Una plataforma, varias comunas.</h1><span class="secundario">Supervisa accesos, operación y calidad de los reportes.</span></div>
+          <button id="abrir-municipalidad" class="principal" type="button">+ Nueva municipalidad</button>
+        </div>
+        <div class="metricas">
+          <div class="panel"><small>Municipalidades del ejemplo</small><div id="total-municipalidades" class="numero">3</div><small>Administración de la plataforma</small></div>
+          <div class="panel"><small>Reportes esta semana</small><div class="numero">148</div><small>Datos de demostración</small></div>
+          <div class="panel"><small>Por revisar</small><div class="numero">12</div><small>Posibles duplicados o abuso</small></div>
+        </div>
+        <div class="dos-columnas">
+          <section class="panel">
+            <h2>Municipalidades</h2>
+            <div id="lista-municipalidades"></div>
+          </section>
+          <section class="panel">
+            <h2>Control de la plataforma</h2>
+            <div class="fila"><div><h3>Roles y permisos</h3><small>Admin · Muni</small></div><span class="etiqueta">Acceso por rol</span></div>
+            <div class="fila"><div><h3>Moderación</h3><small>Reportes pendientes de revisión</small></div><a class="boton" href="reportes-muni.html">Revisar</a></div>
+            <div class="aviso">Cada municipio accede a los reportes de su comuna. La identidad del reportador tiene acceso restringido.</div>
+          </section>
+        </div>
+        <template id="plantilla-municipalidad">
+          <div class="fila"><div><h3 data-nombre></h3><small data-usuarios></small></div><span class="etiqueta" data-estado></span></div>
+        </template>
+        <dialog id="nueva-municipalidad" aria-labelledby="titulo-municipalidad">
+          <form id="formulario-municipalidad">
+            <h2 id="titulo-municipalidad">Nueva municipalidad</h2>
+            <label for="nombre-municipalidad">Nombre de la comuna</label>
+            <input id="nombre-municipalidad" name="nombre" type="text" placeholder="Ej. Villa Norte" required>
+            <label for="correo-municipalidad">Correo institucional del responsable</label>
+            <input id="correo-municipalidad" name="correo" type="email" placeholder="responsable@municipalidad.cl" required>
+            <div class="acciones"><button id="cancelar-municipalidad" type="button">Cancelar</button><button class="principal" type="submit">Crear piloto de demostración</button></div>
+          </form>
+        </dialog>
+      </main>
+    </div>
+    <footer class="pie">Datos ficticios · Comuna de demostración · Sin conexión a servicios de emergencia</footer>
+  </div>
+  <div id="aviso-global" class="aviso estado-global" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

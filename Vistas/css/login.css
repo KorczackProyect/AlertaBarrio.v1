@@ -1,0 +1,14 @@
+/* Estilos exclusivos de la pantalla de acceso. */
+.acceso { max-width: 500px; margin: 48px auto; padding: 0; }
+.acceso-panel { padding: 32px; }
+.acceso-panel > .logo { margin-bottom: 12px; }
+.acceso-panel > .etiqueta { margin-bottom: 28px; }
+.campo-clave { display: flex; align-items: stretch; gap: 8px; }
+.campo-clave input { min-width: 0; width: 100%; flex: 1; }
+.campo-clave button { flex: 0 0 auto; }
+.acceso-ayuda { margin: 24px 0 0; text-align: center; }
+#error-login { margin-bottom: 0; }
+@media (max-width: 400px) {
+  .acceso { margin: 24px auto; }
+  .acceso-panel { padding: 22px; }
+}

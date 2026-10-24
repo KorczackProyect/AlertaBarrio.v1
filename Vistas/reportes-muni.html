@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es" data-vista="muni">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reportes municipales · AlertaBarrio</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="../Modelos/sesionModel.js" defer></script>
+  <script src="../controlador/accesoController.js" defer></script>
+  <script src="../Modelos/incidenciaModel.js" defer></script>
+  <script src="../Modelos/reporteModel.js" defer></script>
+  <script src="js/vista.js" defer></script>
+  <script src="../controlador/reportesController.js" defer></script>
+</head>
+<body>
+  <nav class="navegacion-vistas" aria-label="Navegación principal">
+    <a class="boton" href="admin.html" data-roles="admin" hidden>Admin</a>
+    <a class="boton" href="usuario-muni.html" data-roles="admin muni" hidden>Centro de gestión</a>
+    <a class="boton" href="reportes-muni.html" data-roles="admin muni" hidden aria-current="page">Reportes</a>
+    <a class="boton" href="app-movil.html" data-roles="admin" hidden>App móvil · Reportar</a>
+    <a class="boton" href="app-movil.html" data-publico hidden>Reportar</a>
+    <a class="boton" href="login.html" data-publico hidden>Acceso municipal</a>
+    <span class="usuario-actual" data-con-sesion hidden><span data-usuario-sesion></span> · <span data-rol-sesion></span></span>
+    <button type="button" data-cerrar-sesion data-con-sesion hidden>Cerrar sesión</button>
+  </nav>
+  <div class="aplicacion">
+    <header class="cabecera">
+      <div>
+        <div class="logo">alerta<span>barrio</span> ·</div>
+        <small>Información que se transforma en acción</small>
+      </div>
+      <div><span class="etiqueta">Prototipo</span> <span data-usuario-sesion></span> · Operadora · Seguridad municipal</div>
+    </header>
+    <div class="distribucion">
+      <aside class="barra-lateral" aria-label="Secciones">
+        <div class="seccion">COMUNA DEMO</div>
+        <a class="boton" href="usuario-muni.html">Centro de gestión</a>
+        <a class="boton" href="reportes-muni.html" aria-current="page">Reportes</a>
+        <small class="referencia">Seguridad municipal</small>
+      </aside>
+      <main>
+        <div class="seccion">SEGURIDAD MUNICIPAL / REPORTES</div>
+        <div class="titulo">
+          <div><h1>Reportes ciudadanos</h1><span class="secundario">Revisa evidencia, gestiona los casos y registra su seguimiento.</span></div>
+          <a class="boton" href="usuario-muni.html">Centro de gestión</a>
+        </div>
+        <div class="filtros">
+          <label for="buscar-reporte">Buscar<input id="buscar-reporte" type="search" placeholder="Folio, tipo o lugar"></label>
+          <label for="filtro-tipo">Tipo<select id="filtro-tipo"></select></label>
+          <label for="filtro-estado">Estado<select id="filtro-estado"></select></label>
+        </div>
+        <div class="dos-columnas">
+          <section class="panel" aria-label="Bandeja de reportes">
+            <h2>Reportes recibidos · <span id="cantidad-reportes">3</span></h2>
+            <div id="lista-reportes"></div>
+            <p id="lista-vacia" class="sin-resultados" role="status" hidden>No hay reportes que coincidan con los filtros.</p>
+          </section>
+          <section class="panel" aria-label="Detalle del reporte">
+            <div id="detalle-vacio" hidden><h2>Sin reportes</h2><p class="secundario">Ajusta los filtros para encontrar otros casos.</p></div>
+            <div id="detalle-reporte">
+              <small data-folio></small>
+              <h2 class="detalle-titulo" data-tipo>Detalle del reporte</h2>
+              <span class="etiqueta advertencia" data-prioridad></span>
+              <p data-lugar></p>
+              <p class="secundario" data-descripcion></p>
+              <div class="evidencia" data-evidencia></div>
+              <form id="gestion-reporte">
+                <label for="estado-reporte">Estado del reporte</label>
+                <select id="estado-reporte" name="estado"></select>
+                <label for="nota-interna">Nota interna</label>
+                <textarea id="nota-interna" name="nota" rows="2" placeholder="Agregar antecedentes para el equipo"></textarea>
+                <button class="principal ancho-completo" type="submit">Guardar gestión</button>
+              </form>
+              <small class="detalle-pie">Reportador: identidad restringida · Evidencia sin verificación</small>
+            </div>
+          </section>
+        </div>
+        <template id="plantilla-reporte">
+          <button class="reporte" type="button" aria-pressed="false">
+            <span class="etiqueta" data-prioridad></span>
+            <h3 data-titulo></h3>
+            <small data-lugar></small><br><small data-tiempo></small>
+          </button>
+        </template>
+      </main>
+    </div>
+    <footer class="pie">Datos ficticios · Comuna de demostración · Sin conexión a servicios de emergencia</footer>
+  </div>
+  <div id="aviso-global" class="aviso estado-global" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
